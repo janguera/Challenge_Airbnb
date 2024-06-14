@@ -1,0 +1,27 @@
+{
+	"name": "Python 3",
+	"image": "mcr.microsoft.com/devcontainers/python:0-3.11",
+	"features": {
+		"ghcr.io/devcontainers/features/azure-cli:1": {},
+		"ghcr.io/stuartleeks/dev-container-features/azure-cli-persistence:0": {},
+		"ghcr.io/devcontainers/features/docker-outside-of-docker": {}
+	},
+
+	"forwardPorts": [8080,8300],
+	"runArgs": ["--network=host"],
+
+	"postCreateCommand": "pip3 install --user -r requirements.txt",
+
+	"customizations": {
+		"vscode": {
+			"extensions": [		
+				"github.copilot",
+				"ms-python.debugpy",
+				"ms-python.python"
+			]
+		}
+	},
+	"mounts": [
+		"source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached"
+	]
+}

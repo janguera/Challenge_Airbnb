@@ -1,2 +1,26 @@
 version: '3.4'
 services:
+  api:
+    image: janguera/airbnbchallenge_api
+    container_name: api
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/subfeddit-api/version"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+  streamlit:
+    image: janguera/airbnbchallenge_streamlit
+    container_name: streamlit
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/subfeddit-api/version"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+    depends_on:
+      - api  
